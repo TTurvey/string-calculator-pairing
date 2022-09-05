@@ -30,8 +30,7 @@ public class StringCalculator {
         }
 
         void customised(String inputString) {
-                String firstChar = Character.toString(inputString.charAt(0));
-                if (firstChar.equals("/")) {
+                if (inputString.charAt(0) == '/') {
                         this.customised = true;
                 }
         }
@@ -41,10 +40,7 @@ public class StringCalculator {
         }
 
         String getNumbersString(String inputString) {
-                if (customised) {
-                        return inputString.substring(4);
-                }
-                return inputString;
+                return customised ? inputString.substring(4) : inputString;
         }
 
         String [] getNumbersStringArray(String numbersString, String separatorString) {
