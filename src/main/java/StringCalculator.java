@@ -1,29 +1,53 @@
 public class StringCalculator {
 
-        int add(String numbers) {
-                if (numbers.equals("")) { return 0; }
-                if (numbers.length() == 1) { return Integer.parseInt(numbers); }
+        private boolean customised;
+        private String separator;
 
-                char separator = 'x';
-                if (numbers.substring(0,2).equals("//") ) {
-                        separator = numbers.charAt(2);
-                }
+        public StringCalculator() {
+                this.customised = false;
+                this.separator = ",";
+        }
 
-
-                String[] numbersArray = numbers.split(",\n|" + separator);
-
-                if (numbersArray.length > 1) {
-                        int sum = 0;
-                        for (int i = 0; i < numbersArray.length; i++) {
-                                sum += Integer.parseInt(numbersArray[i]);
-                        }
-                        return sum;
-                } else {
+        int add(String inputString) {
+                if (inputString.equals("")) {
                         return 0;
                 }
+                if (inputString.length() == 1) {
+                        return Integer.parseInt(inputString);
+                }
+
+                customised(inputString);
+                getSeparatorString(inputString);
+
+                String numbersString = getNumbersString(inputString);
+                String[] numbersStringArray = getNumbersStringArray(numbersString, separator);
+
+                int sum = 0;
+                for (String number : numbersStringArray) {
+                        sum += Integer.parseInt(number);
+                }
+                return sum;
+        }
+
+        void customised(String inputString) {
+                String firstChar = Character.toString(inputString.charAt(0));
+                if (firstChar.equals("/")) {
+                        this.customised = true;
+                }
+        }
+
+        void getSeparatorString(String inputString) {
+                if (customised) {separator = inputString.substring(2,3);}
+        }
+
+        String getNumbersString(String inputString) {
+                if (customised) {
+                        return inputString.substring(4);
+                }
+                return inputString;
+        }
+
+        String [] getNumbersStringArray(String numbersString, String separatorString) {
+                return  numbersString.split("\n|" + separatorString);
         }
 }
-
-//for (String str : myStringArray) {
-//        sum += Integer.parseInt(number);
-//}

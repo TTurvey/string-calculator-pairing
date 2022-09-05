@@ -13,16 +13,12 @@ public class StringCalculatorTest {
 
     @Test
     void returns_number_with_one_number() {
-
         assertEquals(1, new StringCalculator().add("1"));
     }
 
     @Test
     void returns_sum_with_two_numbers() {
-        assertEquals(2, new StringCalculator().add("1,1"));
-    }
-    @Test
-    void returns_15_with_10_and_5() {
+        assertEquals(3, new StringCalculator().add("1,2"));
         assertEquals(15, new StringCalculator().add("10,5"));
     }
 
